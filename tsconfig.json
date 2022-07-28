@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "composite": false,
+    "declaration": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2018",
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*", "eth-sdk/**/*", "test-e2e/**/*"],
+  "exclude": ["**/node_modules"]
+}
