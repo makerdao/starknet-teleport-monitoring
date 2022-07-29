@@ -14,6 +14,6 @@ export async function monitorTeleportFlush(
 
   return {
     sinceLastFlush: lastFlush ? currentTimestamp - lastFlush.timestamp.getTime() : +Infinity,
-    debtToFlush: (await l2Sdk.teleportGateway.batchedDaiToFlush(formatBytes32String(targetDomain))).toString(),
+    debtToFlush: (await l2Sdk.teleportGateway.batched_dai_to_flush(`0x${Buffer.from(targetDomain, "utf8").toString("hex")}`)),
   }
 }

@@ -24,14 +24,16 @@ export class FlushEventsSynchronizer extends GenericSynchronizer {
 
   async sync(from: number, to: number) {
     const filter = {
-      fromBlock: from.toString(),
-      toBlock: (to-1).toString(),
+      fromBlock: from,
+      toBlock: (to-1),
       address: this.l2Sdk.teleportGateway.address,
       keys: [hash.getSelectorFromName("Flushed")],
+      page_size: 50,
+      page_number: 1,
     };
 
     // @ts-ignore
-    const newFlushes = await this.l2Sdk.provider.provider.getEvents(filter);
+    const { events: newFlushes } = await this.l2Sdk.provider.provider.getEvents(filter);
     console.log(`[${this.syncName}] Found ${newFlushes.length} new flushes`)
 
     const modelsToCreate: Omit<Flush, 'id'>[] = await Promise.all(

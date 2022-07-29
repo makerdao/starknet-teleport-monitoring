@@ -35,14 +35,16 @@ export class InitEventsSynchronizer extends GenericSynchronizer {
 
   async sync(from: number, to: number) {
     const filter = {
-      fromBlock: from.toString(),
-      toBlock: (to-1).toString(),
+      fromBlock: from,
+      toBlock: (to-1),
       address: this.l2Sdk.teleportGateway.address,
       keys: [hash.getSelectorFromName("TeleportInitialized")],
+      page_size: 50,
+      page_number: 1,
     };
 
     // @ts-ignore
-    const newTeleports = await this.l2Sdk.provider.provider.getEvents(filter);
+    const { events: newTeleports } = await this.l2Sdk.provider.provider.getEvents(filter);
     console.log(`[${this.syncName}] Found ${newTeleports.length} new teleports`)
 
     const modelsToCreate: Omit<Teleport, 'id'>[] = newTeleports.map((w) => {
