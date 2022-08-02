@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - packages/teleport-monitoring/**
   pull_request:
 
 jobs:
@@ -15,9 +13,6 @@ jobs:
     env:
         DATABASE_URL: postgresql://postgres:password@localhost:5432/local
         TEST_RPC: ${{ secrets.KOVAN_RPC_URL }}
-    defaults:
-      run:
-        working-directory: ./packages/teleport-monitoring
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
@@ -54,8 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGION: us-east-1
-      SERVICE_NAME_RINKEBY: teleport-monitor-prod
-      SERVICE_NAME_KOVAN: teleport-monitor-kovan-prod
+      SERVICE_NAME_GOERLI: teleport-monitor-prod
       CLUSTER_NAME: teleport-monitor-prod
       ECR_REPO_NAME: teleport-monitor-prod
 
@@ -97,21 +91,12 @@ jobs:
                         -t $ECR_REGISTRY/$ECR_REPO_NAME:$ENVIRONMENT_TAG \
                         .
           docker push $ECR_REGISTRY/$ECR_REPO_NAME --all-tags
-        working-directory: ./packages/teleport-monitoring
 
-      - name: Update ECS Rinkeby service
+      - name: Update ECS service Goerli
         id: service-update
         run: |
           aws ecs update-service --cluster ${{ env.CLUSTER_NAME }} \
-                                --service ${{ env.SERVICE_NAME_RINKEBY }} \
-                                --force-new-deployment \
-                                --region ${{ env.REGION }}
-
-      - name: Update ECS Kovan service
-        id: service-update
-        run: |
-          aws ecs update-service --cluster ${{ env.CLUSTER_NAME }} \
-                                --service ${{ env.SERVICE_NAME_KOVAN }} \
+                                --service ${{ env.SERVICE_NAME_GOERLI }} \
                                 --force-new-deployment \
                                 --region ${{ env.REGION }}
 
@@ -119,4 +104,4 @@ jobs:
         run: |
           aws ecs wait services-stable \
                     --cluster ${{ env.CLUSTER_NAME }} \
-                    --services '[ "${{ env.SERVICE_NAME_RINKEBY }}" "${{ env.SERVICE_NAME_KOVAN }}" ]'
+                    --services '[ "${{ env.SERVICE_NAME_GOERLI }}" ]'
