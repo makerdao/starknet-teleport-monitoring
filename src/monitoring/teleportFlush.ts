@@ -11,7 +11,7 @@ export async function monitorTeleportFlush(
   const currentTimestamp = new Date().getTime()
   const lastFlush = await flushRepository.findLatest(sourceDomain, targetDomain)
   const { res: _debtToFlush } = await l2Sdk.teleportGateway.batched_dai_to_flush(l2String(targetDomain))
-  const debtToFlush = `0x${_debtToFlush.low.toString(16)}${_debtToFlush.high.toString(16)}`
+  const debtToFlush = `0x${_debtToFlush.high.toString(16)}${_debtToFlush.low.toString(16)}`
   return {
     sinceLastFlush: lastFlush ? currentTimestamp - lastFlush.timestamp.getTime() : +Infinity,
     debtToFlush,

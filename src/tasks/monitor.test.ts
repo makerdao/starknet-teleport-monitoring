@@ -1,6 +1,7 @@
 const hre = require('hardhat')
 import { expect } from 'earljs'
 import { ethers, providers, Wallet } from 'ethers'
+import { Provider } from 'starknet'
 import waitForExpect from 'wait-for-expect'
 
 import { setupDatabaseTestSuite } from '../../test-e2e/database'
@@ -30,19 +31,19 @@ describe('Monitoring', () => {
 
     // start monitoring
     const network = networks[chainIds.GOERLI]
-    const l2Provider = new ethers.providers.JsonRpcProvider(network.slaves[0].l2Rpc)
+    const l2Provider = new Provider(network.slaves[0].l2Rpc)["provider"];
     const teleportRepository = new TeleportRepository(prisma)
     const settleRepository = new SettleRepository(prisma)
     const synchronizerStatusRepository = new SynchronizerStatusRepository(prisma)
     const flushRepository = new FlushRepository(prisma)
     await synchronizerStatusRepository.upsert({
       domain: sourceDomain,
-      block: (await l2Provider.getBlock('latest')).number,
+      block: await l2Provider.getBlockNumber(),
       name: 'InitEventsSynchronizer',
     })
     await synchronizerStatusRepository.upsert({
       domain: sourceDomain,
-      block: (await l2Provider.getBlock('latest')).number,
+      block: await l2Provider.getBlockNumber(),
       name: 'FlushEventsSynchronizer',
     })
     await synchronizerStatusRepository.upsert({
@@ -76,14 +77,15 @@ describe('Monitoring', () => {
       timestamp: '0',
     }
     const { signatures } = await getAttestations(signers, teleport)
-    await sdk.oracleAuth.connect(receiver).requestMint(teleport, signatures, 0, 0)
+    const tx = await sdk.oracleAuth.connect(receiver).requestMint(teleport, signatures, 0, 0)
+    await tx.wait();
     console.log(`Printing unbacked DAI done at block ${await hhProvider.getBlockNumber()}`)
     await mineABunchOfBlocks(hhProvider)
 
     // assert
     await waitForExpect(() => {
-      expect(metrics['teleport_bad_debt{domain="STARKNET-MASTER-1",network="goerli"}']).toEqual(daiToMint.toString())
-    }, 10_000)
+      expect(metrics['teleport_bad_debt{domain="GOERLI-MASTER-1",network="goerli"}']).toEqual(daiToMint.toString())
+    }, 20_000)
   })
 
   afterEach(async () => {

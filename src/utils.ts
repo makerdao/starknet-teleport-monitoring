@@ -1,4 +1,4 @@
-import ethers from 'ethers'
+import { ethers } from 'ethers'
 
 export function setIntervalAsync(fn: () => Promise<void>, gap: number): { cancel: () => void } {
   let cancelled = false

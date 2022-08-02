@@ -10,11 +10,11 @@ export const idsToChains = invert(chainIds)
 export const networks: { [id: number]: NetworkConfig } = {
   [chainIds.GOERLI]: {
     networkName: 'goerli',
-    name: 'STARKNET-MASTER-1',
+    name: 'GOERLI-MASTER-1',
     sdkName: 'Goerli',
     slaves: [
       {
-        name: 'STARKNET-SLAVE-GOERLI-1',
+        name: 'ALPHA_GOERLI-SLAVE-1',
         l2Rpc: {
           rpc: {
             nodeUrl: 'https://starknet-goerli.infura.io/v3/0a0b5cc7abb944b184c6355cccbe5984',
