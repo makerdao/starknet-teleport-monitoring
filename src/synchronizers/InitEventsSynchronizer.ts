@@ -1,6 +1,6 @@
 import { Teleport } from '@prisma/client'
 import { BigNumber } from 'ethers/lib/ethers'
-import { keccak256, parseBytes32String } from 'ethers/lib/utils'
+import { keccak256, defaultAbiCoder, parseBytes32String } from 'ethers/lib/utils'
 import { hash } from 'starknet';
 
 import { BlockchainClient } from '../peripherals/blockchain'
@@ -9,6 +9,7 @@ import { TeleportRepository } from '../peripherals/db/TeleportRepository'
 import { TxHandle } from '../peripherals/db/utils'
 import { L2Sdk } from '../sdks'
 import { GenericSynchronizer } from './GenericSynchronizer'
+import { toL1String, toBytes32 } from '../utils'
 
 export type OnChainTeleport = {
   sourceDomain: string
@@ -38,26 +39,37 @@ export class InitEventsSynchronizer extends GenericSynchronizer {
       fromBlock: from,
       toBlock: (to-1),
       address: this.l2Sdk.teleportGateway.address,
+      // keys: [hash.getSelectorFromName("TeleportInitialized")],
       keys: [hash.getSelectorFromName("TeleportInitialized")],
       page_size: 50,
-      page_number: 1,
-    };
+      page_number: 0,
+    }
 
-    // @ts-ignore
-    const { events: newTeleports } = await this.l2Sdk.provider.provider.getEvents(filter);
+    // @ts-ignore StarknetJs types are wrong
+    const { events: newTeleports } = await this.l2Sdk.provider.getEvents(filter)
     console.log(`[${this.syncName}] Found ${newTeleports.length} new teleports`)
 
-    const modelsToCreate: Omit<Teleport, 'id'>[] = newTeleports.map((w) => {
-      const hash = keccak256(w.data)
+    const modelsToCreate: Omit<Teleport, 'id'>[] = newTeleports.map((w: any) => {
+      const message = defaultAbiCoder.encode(
+        ["bytes32", "bytes32", "bytes32", "bytes32", "uint128", "uint80", "uint48"],
+        [
+          toL1String(w.data[0]),
+          toL1String(w.data[1]),
+          toBytes32(w.data[2]),
+          toBytes32(w.data[3]),
+          ...w.data.slice(4),
+        ],
+      )
+      const teleportHash = keccak256(message)
       return {
-        hash,
-        sourceDomain: parseBytes32String(w.args[0].sourceDomain),
-        targetDomain: parseBytes32String(w.args[0].targetDomain),
-        amount: w.args[0].amount.toString(),
-        nonce: w.args[0].nonce.toString(),
-        operator: w.args[0].operator,
-        receiver: w.args[0].receiver,
-        timestamp: new Date(w.args[0].timestamp * 1000),
+        hash: teleportHash,
+        sourceDomain: parseBytes32String(toL1String(w.data[0])),
+        targetDomain: parseBytes32String(toL1String(w.data[1])),
+        amount: w.data[4].toString(),
+        nonce: w.data[5].toString(),
+        operator: toBytes32(w.data[2]),
+        receiver: toBytes32(w.data[3]),
+        timestamp: new Date(parseInt(w.data[6])* 1000),
       }
     })
 

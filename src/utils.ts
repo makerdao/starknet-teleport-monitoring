@@ -43,3 +43,11 @@ export function makeMetricName(baseName: string, labels: { [name: string]: strin
     .join(',')
   return baseName + `{${labelsString}}`
 }
+
+export function toL1String(x: string): string {
+  return `0x${BigInt(x).toString(16).padEnd(64, "0")}`
+}
+
+export function toBytes32(x: string): string {
+  return `0x${x.slice(2).padStart(64, "0")}`
+}

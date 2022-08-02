@@ -17,6 +17,6 @@ export class StarknetBlockchainClient implements BlockchainClient {
   constructor(private readonly provider: Provider) {}
 
   async getLatestBlockNumber(): Promise<number> {
-    return (await this.provider.getBlock()).block_number
+    return this.provider["provider"].getBlockNumber()
   }
 }
