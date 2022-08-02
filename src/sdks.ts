@@ -2,9 +2,9 @@ import { providers } from 'ethers'
 import { Provider } from 'starknet'
 
 import * as sdks from './sdk'
-import * as starknetSdks from './starknetSdk/index'
 import { GoerliSdk } from './sdk'
 import { StarknetGoerliSdk } from './starknetSdk'
+import * as starknetSdks from './starknetSdk/index'
 
 export type L1Sdk = GoerliSdk 
 export type L2Sdk = StarknetGoerliSdk 

@@ -7,8 +7,8 @@ import { FlushRepository } from '../peripherals/db/FlushRepository'
 import { SynchronizerStatusRepository } from '../peripherals/db/SynchronizerStatusRepository'
 import { TxHandle } from '../peripherals/db/utils'
 import { L2Sdk } from '../sdks'
-import { GenericSynchronizer } from './GenericSynchronizer'
 import { toL1String } from '../utils'
+import { GenericSynchronizer } from './GenericSynchronizer'
 
 export class FlushEventsSynchronizer extends GenericSynchronizer {
   constructor(

@@ -1,4 +1,4 @@
-import { BigNumber, ethers, providers } from 'ethers'
+import { BigNumber, providers } from 'ethers'
 import { Provider } from 'starknet';
 
 import { bridgeInvariant } from '../monitoring/bridgeInvariant'

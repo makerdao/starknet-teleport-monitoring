@@ -1,8 +1,8 @@
-import { Provider, RpcProvider, Contract, Account } from 'starknet';
-import * as types from './types';
+import { Account,Contract, Provider, RpcProvider } from 'starknet';
 
 import starknetGoerliDaiAbi from '../../eth-sdk/starknetAbis/dai.json';
 import starknetGoerliTeleportGatewayAbi from '../../eth-sdk/starknetAbis/l2_dai_teleport_gateway.json';
+import * as types from './types';
 export function getContract(address: string, abi: any, defaultAccountOrProvider: Account | Provider): any {
     return new Contract(abi, address, defaultAccountOrProvider);
 }

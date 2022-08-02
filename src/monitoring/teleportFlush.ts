@@ -1,4 +1,3 @@
-import { formatBytes32String } from 'ethers/lib/utils'
 
 import { FlushRepository } from '../peripherals/db/FlushRepository'
 import { L2Sdk } from '../sdks'

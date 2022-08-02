@@ -1,6 +1,6 @@
 import { Teleport } from '@prisma/client'
 import { BigNumber } from 'ethers/lib/ethers'
-import { keccak256, defaultAbiCoder, parseBytes32String } from 'ethers/lib/utils'
+import { defaultAbiCoder, keccak256, parseBytes32String } from 'ethers/lib/utils'
 import { hash } from 'starknet';
 
 import { BlockchainClient } from '../peripherals/blockchain'
@@ -8,8 +8,8 @@ import { SynchronizerStatusRepository } from '../peripherals/db/SynchronizerStat
 import { TeleportRepository } from '../peripherals/db/TeleportRepository'
 import { TxHandle } from '../peripherals/db/utils'
 import { L2Sdk } from '../sdks'
+import { toBytes32,toL1String } from '../utils'
 import { GenericSynchronizer } from './GenericSynchronizer'
-import { toL1String, toBytes32 } from '../utils'
 
 export type OnChainTeleport = {
   sourceDomain: string
