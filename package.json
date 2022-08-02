@@ -15,7 +15,7 @@
     "format:fix": "prettier --write \"./**/*.ts\"",
     "lint": "eslint --ext .ts src test-e2e",
     "lint:fix": "yarn lint --fix",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit --skipLibCheck",
     "build": "rm -rf ./dist && tsc --skipLibCheck",
     "test": "mocha 'src/**/*.test.ts'"
   },
