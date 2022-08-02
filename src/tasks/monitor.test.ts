@@ -31,7 +31,7 @@ describe('Monitoring', () => {
 
     // start monitoring
     const network = networks[chainIds.GOERLI]
-    const l2Provider = new Provider(network.slaves[0].l2Rpc)["provider"];
+    const l2Provider = new Provider(network.slaves[0].l2Rpc)['provider']
     const teleportRepository = new TeleportRepository(prisma)
     const settleRepository = new SettleRepository(prisma)
     const synchronizerStatusRepository = new SynchronizerStatusRepository(prisma)
@@ -77,8 +77,7 @@ describe('Monitoring', () => {
       timestamp: '0',
     }
     const { signatures } = await getAttestations(signers, teleport)
-    const tx = await sdk.oracleAuth.connect(receiver).requestMint(teleport, signatures, 0, 0)
-    await tx.wait();
+    await sdk.oracleAuth.connect(receiver).requestMint(teleport, signatures, 0, 0)
     console.log(`Printing unbacked DAI done at block ${await hhProvider.getBlockNumber()}`)
     await mineABunchOfBlocks(hhProvider)
 

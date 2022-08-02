@@ -28,7 +28,7 @@ export async function calcBadDebt({
 
   for (const slave of network.slaves) {
     console.log(`Syncing debt for ${slave.name}`)
-    const l2Provider = (new starknet.Provider(slave.l2Rpc))["provider"]
+    const l2Provider = new starknet.Provider(slave.l2Rpc)['provider']
     const l2Sdk = getL2SdkBasedOnNetworkName(slave.sdkName, l2Provider)
 
     const synchronizer = new InitEventsSynchronizer(
