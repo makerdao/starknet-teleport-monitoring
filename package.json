@@ -16,7 +16,7 @@
     "lint": "eslint --ext .ts src test-e2e",
     "lint:fix": "yarn lint --fix",
     "typecheck": "tsc --noEmit",
-    "build": "rm -rf ./dist && tsc -p ./tsconfig.build.json",
+    "build": "rm -rf ./dist && tsc --skipLibCheck",
     "test": "mocha 'src/**/*.test.ts'"
   },
   "types": "dist/index.d.ts",

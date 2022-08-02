@@ -13,5 +13,5 @@
     "resolveJsonModule": true
   },
   "include": ["src/**/*", "eth-sdk/**/*", "test-e2e/**/*"],
-  "exclude": ["**/node_modules"]
+  "exclude": ["node_modules"]
 }
