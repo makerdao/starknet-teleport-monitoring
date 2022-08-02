@@ -5,9 +5,9 @@
 import type {
   Contract,
   Overrides,
-  AddTransactionResponse,
   Invocation,
   EstimateFeeResponse,
+  api,
 } from "starknet";
 import type { BigNumberish } from "starknet/utils/number";
 import type BN from "bn.js";
@@ -47,25 +47,25 @@ export interface l2_dai_teleport_gateway extends Contract {
   rely(
     user: BigNumberish,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   deny(
     user: BigNumberish,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
-  close(options?: Overrides): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
+  close(options?: Overrides): Promise<api.RPC.AddTransactionResponse>;
   file(
     what: BigNumberish,
     domain: BigNumberish,
     data: BigNumberish,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   initiate_teleport(
     target_domain: BigNumberish,
     receiver: BigNumberish,
     amount: BigNumberish,
     operator: BigNumberish,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   finalize_register_teleport(
     target_domain: BigNumberish,
     receiver: BigNumberish,
@@ -74,11 +74,11 @@ export interface l2_dai_teleport_gateway extends Contract {
     nonce: BigNumberish,
     timestamp: BigNumberish,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   flush(
     target_domain: BigNumberish,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   functions: {
     nonce(options?: {
       blockIdentifier?: BlockIdentifier;
@@ -110,25 +110,25 @@ export interface l2_dai_teleport_gateway extends Contract {
     rely(
       user: BigNumberish,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     deny(
       user: BigNumberish,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
-    close(options?: Overrides): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
+    close(options?: Overrides): Promise<api.RPC.AddTransactionResponse>;
     file(
       what: BigNumberish,
       domain: BigNumberish,
       data: BigNumberish,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     initiate_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
       amount: BigNumberish,
       operator: BigNumberish,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     finalize_register_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
@@ -137,11 +137,11 @@ export interface l2_dai_teleport_gateway extends Contract {
       nonce: BigNumberish,
       timestamp: BigNumberish,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     flush(
       target_domain: BigNumberish,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
   };
   callStatic: {
     nonce(options?: {

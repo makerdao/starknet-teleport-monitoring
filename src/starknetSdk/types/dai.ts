@@ -5,9 +5,9 @@
 import type {
   Contract,
   Overrides,
-  AddTransactionResponse,
   Invocation,
   EstimateFeeResponse,
+  api,
 } from "starknet";
 import type { BigNumberish } from "starknet/utils/number";
 import type BN from "bn.js";
@@ -46,46 +46,46 @@ export interface dai extends Contract {
     account: BigNumberish,
     amount: Uint256,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   burn(
     account: BigNumberish,
     amount: Uint256,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   rely(
     user: BigNumberish,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   deny(
     user: BigNumberish,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   transfer(
     recipient: BigNumberish,
     amount: Uint256,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   transferFrom(
     sender: BigNumberish,
     recipient: BigNumberish,
     amount: Uint256,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   approve(
     spender: BigNumberish,
     amount: Uint256,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   increaseAllowance(
     spender: BigNumberish,
     amount: Uint256,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   decreaseAllowance(
     spender: BigNumberish,
     amount: Uint256,
     options?: Overrides
-  ): Promise<AddTransactionResponse>;
+  ): Promise<api.RPC.AddTransactionResponse>;
   functions: {
     decimals(options?: {
       blockIdentifier?: BlockIdentifier;
@@ -116,46 +116,46 @@ export interface dai extends Contract {
       account: BigNumberish,
       amount: Uint256,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     burn(
       account: BigNumberish,
       amount: Uint256,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     rely(
       user: BigNumberish,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     deny(
       user: BigNumberish,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     transfer(
       recipient: BigNumberish,
       amount: Uint256,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     transferFrom(
       sender: BigNumberish,
       recipient: BigNumberish,
       amount: Uint256,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     approve(
       spender: BigNumberish,
       amount: Uint256,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     increaseAllowance(
       spender: BigNumberish,
       amount: Uint256,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
     decreaseAllowance(
       spender: BigNumberish,
       amount: Uint256,
       options?: Overrides
-    ): Promise<AddTransactionResponse>;
+    ): Promise<api.RPC.AddTransactionResponse>;
   };
   callStatic: {
     decimals(options?: {

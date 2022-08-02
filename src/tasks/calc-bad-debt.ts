@@ -1,7 +1,8 @@
-import { BigNumber, ethers, providers } from "ethers";
+import { BigNumber, providers } from "ethers";
+import starknet from "starknet";
 
 import { monitorTeleportMints } from "../monitoring/teleportMints";
-import { EthersBlockchainClient } from "../peripherals/blockchain";
+import { StarknetBlockchainClient } from "../peripherals/blockchain";
 import { SynchronizerStatusRepository } from "../peripherals/db/SynchronizerStatusRepository";
 import { TeleportRepository } from "../peripherals/db/TeleportRepository";
 import {
@@ -33,11 +34,11 @@ export async function calcBadDebt({
 
   for (const slave of network.slaves) {
     console.log(`Syncing debt for ${slave.name}`);
-    const l2Provider = new ethers.providers.JsonRpcProvider(slave.l2Rpc);
+    const l2Provider = new starknet.Provider(slave.l2Rpc);
     const l2Sdk = getL2SdkBasedOnNetworkName(slave.sdkName, l2Provider);
 
     const synchronizer = new InitEventsSynchronizer(
-      new EthersBlockchainClient(l2Provider),
+      new StarknetBlockchainClient(l2Provider),
       synchronizerStatusRepository,
       slave.name,
       slave.bridgeDeploymentBlock,

@@ -49,14 +49,13 @@ export class InitEventsSynchronizer extends GenericSynchronizer {
       fromBlock: from,
       toBlock: to - 1,
       address: this.l2Sdk.teleportGateway.address,
-      // keys: [hash.getSelectorFromName("TeleportInitialized")],
       keys: [hash.getSelectorFromName("TeleportInitialized")],
       page_size: 50,
       page_number: 0,
     };
 
-    // @ts-ignore StarknetJs types are wrong
     const { events: newTeleports } = await this.l2Sdk.provider.getEvents(
+      // @ts-ignore StarknetJs types are wrong
       filter
     );
     console.log(
