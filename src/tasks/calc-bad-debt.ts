@@ -1,17 +1,14 @@
-import { BigNumber, providers } from "ethers";
-import starknet from "starknet";
+import { BigNumber, providers } from 'ethers'
+import starknet from 'starknet'
 
-import { monitorTeleportMints } from "../monitoring/teleportMints";
-import { StarknetBlockchainClient } from "../peripherals/blockchain";
-import { SynchronizerStatusRepository } from "../peripherals/db/SynchronizerStatusRepository";
-import { TeleportRepository } from "../peripherals/db/TeleportRepository";
-import {
-  getL1SdkBasedOnNetworkName,
-  getL2SdkBasedOnNetworkName,
-} from "../sdks";
-import { InitEventsSynchronizer } from "../synchronizers/InitEventsSynchronizer";
-import { NetworkConfig } from "../types";
-import { inChunks } from "../utils";
+import { monitorTeleportMints } from '../monitoring/teleportMints'
+import { StarknetBlockchainClient } from '../peripherals/blockchain'
+import { SynchronizerStatusRepository } from '../peripherals/db/SynchronizerStatusRepository'
+import { TeleportRepository } from '../peripherals/db/TeleportRepository'
+import { getL1SdkBasedOnNetworkName, getL2SdkBasedOnNetworkName } from '../sdks'
+import { InitEventsSynchronizer } from '../synchronizers/InitEventsSynchronizer'
+import { NetworkConfig } from '../types'
+import { inChunks } from '../utils'
 
 export async function calcBadDebt({
   network,
@@ -19,23 +16,20 @@ export async function calcBadDebt({
   teleportRepository,
   synchronizerStatusRepository,
 }: {
-  network: NetworkConfig;
-  l1Provider: providers.Provider;
-  teleportRepository: TeleportRepository;
-  synchronizerStatusRepository: SynchronizerStatusRepository;
+  network: NetworkConfig
+  l1Provider: providers.Provider
+  teleportRepository: TeleportRepository
+  synchronizerStatusRepository: SynchronizerStatusRepository
 }) {
-  const l1Sdk = getL1SdkBasedOnNetworkName(network.sdkName, l1Provider);
-  const l1LatestBlock = await l1Provider.getBlockNumber();
+  const l1Sdk = getL1SdkBasedOnNetworkName(network.sdkName, l1Provider)
+  const l1LatestBlock = await l1Provider.getBlockNumber()
 
-  console.log(
-    `Finding bad debt for ${network.name} until block: `,
-    l1LatestBlock
-  );
+  console.log(`Finding bad debt for ${network.name} until block: `, l1LatestBlock)
 
   for (const slave of network.slaves) {
-    console.log(`Syncing debt for ${slave.name}`);
-    const l2Provider = new starknet.Provider(slave.l2Rpc);
-    const l2Sdk = getL2SdkBasedOnNetworkName(slave.sdkName, l2Provider);
+    console.log(`Syncing debt for ${slave.name}`)
+    const l2Provider = new starknet.Provider(slave.l2Rpc)
+    const l2Sdk = getL2SdkBasedOnNetworkName(slave.sdkName, l2Provider)
 
     const synchronizer = new InitEventsSynchronizer(
       new StarknetBlockchainClient(l2Provider),
@@ -44,23 +38,16 @@ export async function calcBadDebt({
       slave.bridgeDeploymentBlock,
       slave.syncBatchSize,
       teleportRepository,
-      l2Sdk
-    );
+      l2Sdk,
+    )
 
-    await synchronizer.syncOnce();
+    await synchronizer.syncOnce()
   }
 
-  let cumulativeBadDebt = BigNumber.from(0);
-  await inChunks(
-    network.joinDeploymentBlock,
-    l1LatestBlock,
-    100_000,
-    async (from: number, to: number) => {
-      cumulativeBadDebt = cumulativeBadDebt.add(
-        await monitorTeleportMints(l1Sdk, teleportRepository, from, to)
-      );
-    }
-  );
+  let cumulativeBadDebt = BigNumber.from(0)
+  await inChunks(network.joinDeploymentBlock, l1LatestBlock, 100_000, async (from: number, to: number) => {
+    cumulativeBadDebt = cumulativeBadDebt.add(await monitorTeleportMints(l1Sdk, teleportRepository, from, to))
+  })
 
-  console.log(`Cumulative bad debt for ${network.name}: ${cumulativeBadDebt}`);
+  console.log(`Cumulative bad debt for ${network.name}: ${cumulativeBadDebt}`)
 }

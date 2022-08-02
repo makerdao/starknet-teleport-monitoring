@@ -2,70 +2,42 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type {
-  Contract,
-  Overrides,
-  Invocation,
-  EstimateFeeResponse,
-  api,
-} from "starknet";
-import type { BigNumberish } from "starknet/utils/number";
-import type BN from "bn.js";
-import type { BlockIdentifier } from "starknet/provider/utils";
+import type { Contract, Overrides, Invocation, EstimateFeeResponse, api } from 'starknet'
+import type { BigNumberish } from 'starknet/utils/number'
+import type BN from 'bn.js'
+import type { BlockIdentifier } from 'starknet/provider/utils'
 
-export type Uint256 = { low: BigNumberish; high: BigNumberish };
-export type Uint256Output = { low: BN; high: BN };
+export type Uint256 = { low: BigNumberish; high: BigNumberish }
+export type Uint256Output = { low: BN; high: BN }
 
 export interface l2_dai_teleport_gateway extends Contract {
-  nonce(options?: {
-    blockIdentifier?: BlockIdentifier;
-  }): Promise<[BN] & { res: BN }>;
-  is_open(options?: {
-    blockIdentifier?: BlockIdentifier;
-  }): Promise<[BN] & { res: BN }>;
-  dai(options?: {
-    blockIdentifier?: BlockIdentifier;
-  }): Promise<[BN] & { res: BN }>;
-  teleport_gateway(options?: {
-    blockIdentifier?: BlockIdentifier;
-  }): Promise<[BN] & { res: BN }>;
-  domain(options?: {
-    blockIdentifier?: BlockIdentifier;
-  }): Promise<[BN] & { res: BN }>;
-  valid_domains(
-    domain: BigNumberish,
-    options?: { blockIdentifier?: BlockIdentifier }
-  ): Promise<[BN] & { res: BN }>;
+  nonce(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+  is_open(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+  dai(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+  teleport_gateway(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+  domain(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+  valid_domains(domain: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
   batched_dai_to_flush(
     domain: BigNumberish,
-    options?: { blockIdentifier?: BlockIdentifier }
-  ): Promise<[Uint256Output] & { res: Uint256Output }>;
-  wards(
-    user: BigNumberish,
-    options?: { blockIdentifier?: BlockIdentifier }
-  ): Promise<[BN] & { res: BN }>;
-  rely(
-    user: BigNumberish,
-    options?: Overrides
-  ): Promise<api.RPC.AddTransactionResponse>;
-  deny(
-    user: BigNumberish,
-    options?: Overrides
-  ): Promise<api.RPC.AddTransactionResponse>;
-  close(options?: Overrides): Promise<api.RPC.AddTransactionResponse>;
+    options?: { blockIdentifier?: BlockIdentifier },
+  ): Promise<[Uint256Output] & { res: Uint256Output }>
+  wards(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+  rely(user: BigNumberish, options?: Overrides): Promise<api.RPC.AddTransactionResponse>
+  deny(user: BigNumberish, options?: Overrides): Promise<api.RPC.AddTransactionResponse>
+  close(options?: Overrides): Promise<api.RPC.AddTransactionResponse>
   file(
     what: BigNumberish,
     domain: BigNumberish,
     data: BigNumberish,
-    options?: Overrides
-  ): Promise<api.RPC.AddTransactionResponse>;
+    options?: Overrides,
+  ): Promise<api.RPC.AddTransactionResponse>
   initiate_teleport(
     target_domain: BigNumberish,
     receiver: BigNumberish,
     amount: BigNumberish,
     operator: BigNumberish,
-    options?: Overrides
-  ): Promise<api.RPC.AddTransactionResponse>;
+    options?: Overrides,
+  ): Promise<api.RPC.AddTransactionResponse>
   finalize_register_teleport(
     target_domain: BigNumberish,
     receiver: BigNumberish,
@@ -73,62 +45,37 @@ export interface l2_dai_teleport_gateway extends Contract {
     operator: BigNumberish,
     nonce: BigNumberish,
     timestamp: BigNumberish,
-    options?: Overrides
-  ): Promise<api.RPC.AddTransactionResponse>;
-  flush(
-    target_domain: BigNumberish,
-    options?: Overrides
-  ): Promise<api.RPC.AddTransactionResponse>;
+    options?: Overrides,
+  ): Promise<api.RPC.AddTransactionResponse>
+  flush(target_domain: BigNumberish, options?: Overrides): Promise<api.RPC.AddTransactionResponse>
   functions: {
-    nonce(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    is_open(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    dai(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    teleport_gateway(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    domain(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    valid_domains(
-      domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[BN] & { res: BN }>;
+    nonce(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    is_open(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    dai(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    teleport_gateway(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    domain(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    valid_domains(domain: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
     batched_dai_to_flush(
       domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[Uint256Output] & { res: Uint256Output }>;
-    wards(
-      user: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[BN] & { res: BN }>;
-    rely(
-      user: BigNumberish,
-      options?: Overrides
-    ): Promise<api.RPC.AddTransactionResponse>;
-    deny(
-      user: BigNumberish,
-      options?: Overrides
-    ): Promise<api.RPC.AddTransactionResponse>;
-    close(options?: Overrides): Promise<api.RPC.AddTransactionResponse>;
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<[Uint256Output] & { res: Uint256Output }>
+    wards(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    rely(user: BigNumberish, options?: Overrides): Promise<api.RPC.AddTransactionResponse>
+    deny(user: BigNumberish, options?: Overrides): Promise<api.RPC.AddTransactionResponse>
+    close(options?: Overrides): Promise<api.RPC.AddTransactionResponse>
     file(
       what: BigNumberish,
       domain: BigNumberish,
       data: BigNumberish,
-      options?: Overrides
-    ): Promise<api.RPC.AddTransactionResponse>;
+      options?: Overrides,
+    ): Promise<api.RPC.AddTransactionResponse>
     initiate_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
       amount: BigNumberish,
       operator: BigNumberish,
-      options?: Overrides
-    ): Promise<api.RPC.AddTransactionResponse>;
+      options?: Overrides,
+    ): Promise<api.RPC.AddTransactionResponse>
     finalize_register_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
@@ -136,63 +83,38 @@ export interface l2_dai_teleport_gateway extends Contract {
       operator: BigNumberish,
       nonce: BigNumberish,
       timestamp: BigNumberish,
-      options?: Overrides
-    ): Promise<api.RPC.AddTransactionResponse>;
-    flush(
-      target_domain: BigNumberish,
-      options?: Overrides
-    ): Promise<api.RPC.AddTransactionResponse>;
-  };
+      options?: Overrides,
+    ): Promise<api.RPC.AddTransactionResponse>
+    flush(target_domain: BigNumberish, options?: Overrides): Promise<api.RPC.AddTransactionResponse>
+  }
   callStatic: {
-    nonce(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    is_open(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    dai(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    teleport_gateway(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    domain(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<[BN] & { res: BN }>;
-    valid_domains(
-      domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[BN] & { res: BN }>;
+    nonce(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    is_open(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    dai(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    teleport_gateway(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    domain(options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    valid_domains(domain: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
     batched_dai_to_flush(
       domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[Uint256Output] & { res: Uint256Output }>;
-    wards(
-      user: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[BN] & { res: BN }>;
-    rely(
-      user: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[] & {}>;
-    deny(
-      user: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[] & {}>;
-    close(options?: { blockIdentifier?: BlockIdentifier }): Promise<[] & {}>;
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<[Uint256Output] & { res: Uint256Output }>
+    wards(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[BN] & { res: BN }>
+    rely(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[] & {}>
+    deny(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[] & {}>
+    close(options?: { blockIdentifier?: BlockIdentifier }): Promise<[] & {}>
     file(
       what: BigNumberish,
       domain: BigNumberish,
       data: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[] & {}>;
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<[] & {}>
     initiate_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
       amount: BigNumberish,
       operator: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[] & {}>;
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<[] & {}>
     finalize_register_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
@@ -200,49 +122,30 @@ export interface l2_dai_teleport_gateway extends Contract {
       operator: BigNumberish,
       nonce: BigNumberish,
       timestamp: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[] & {}>;
-    flush(
-      target_domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<[] & {}>;
-  };
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<[] & {}>
+    flush(target_domain: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<[] & {}>
+  }
   populateTransaction: {
-    nonce(options?: { blockIdentifier?: BlockIdentifier }): Invocation;
-    is_open(options?: { blockIdentifier?: BlockIdentifier }): Invocation;
-    dai(options?: { blockIdentifier?: BlockIdentifier }): Invocation;
-    teleport_gateway(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Invocation;
-    domain(options?: { blockIdentifier?: BlockIdentifier }): Invocation;
-    valid_domains(
-      domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Invocation;
-    batched_dai_to_flush(
-      domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Invocation;
-    wards(
-      user: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Invocation;
-    rely(user: BigNumberish, options?: Overrides): Invocation;
-    deny(user: BigNumberish, options?: Overrides): Invocation;
-    close(options?: Overrides): Invocation;
-    file(
-      what: BigNumberish,
-      domain: BigNumberish,
-      data: BigNumberish,
-      options?: Overrides
-    ): Invocation;
+    nonce(options?: { blockIdentifier?: BlockIdentifier }): Invocation
+    is_open(options?: { blockIdentifier?: BlockIdentifier }): Invocation
+    dai(options?: { blockIdentifier?: BlockIdentifier }): Invocation
+    teleport_gateway(options?: { blockIdentifier?: BlockIdentifier }): Invocation
+    domain(options?: { blockIdentifier?: BlockIdentifier }): Invocation
+    valid_domains(domain: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Invocation
+    batched_dai_to_flush(domain: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Invocation
+    wards(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Invocation
+    rely(user: BigNumberish, options?: Overrides): Invocation
+    deny(user: BigNumberish, options?: Overrides): Invocation
+    close(options?: Overrides): Invocation
+    file(what: BigNumberish, domain: BigNumberish, data: BigNumberish, options?: Overrides): Invocation
     initiate_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
       amount: BigNumberish,
       operator: BigNumberish,
-      options?: Overrides
-    ): Invocation;
+      options?: Overrides,
+    ): Invocation
     finalize_register_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
@@ -250,62 +153,38 @@ export interface l2_dai_teleport_gateway extends Contract {
       operator: BigNumberish,
       nonce: BigNumberish,
       timestamp: BigNumberish,
-      options?: Overrides
-    ): Invocation;
-    flush(target_domain: BigNumberish, options?: Overrides): Invocation;
-  };
+      options?: Overrides,
+    ): Invocation
+    flush(target_domain: BigNumberish, options?: Overrides): Invocation
+  }
   estimateFee: {
-    nonce(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<EstimateFeeResponse>;
-    is_open(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<EstimateFeeResponse>;
-    dai(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<EstimateFeeResponse>;
-    teleport_gateway(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<EstimateFeeResponse>;
-    domain(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<EstimateFeeResponse>;
-    valid_domains(
-      domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
+    nonce(options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+    is_open(options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+    dai(options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+    teleport_gateway(options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+    domain(options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+    valid_domains(domain: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
     batched_dai_to_flush(
       domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
-    wards(
-      user: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
-    rely(
-      user: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
-    deny(
-      user: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
-    close(options?: {
-      blockIdentifier?: BlockIdentifier;
-    }): Promise<EstimateFeeResponse>;
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<EstimateFeeResponse>
+    wards(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+    rely(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+    deny(user: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+    close(options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
     file(
       what: BigNumberish,
       domain: BigNumberish,
       data: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<EstimateFeeResponse>
     initiate_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
       amount: BigNumberish,
       operator: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<EstimateFeeResponse>
     finalize_register_teleport(
       target_domain: BigNumberish,
       receiver: BigNumberish,
@@ -313,11 +192,8 @@ export interface l2_dai_teleport_gateway extends Contract {
       operator: BigNumberish,
       nonce: BigNumberish,
       timestamp: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
-    flush(
-      target_domain: BigNumberish,
-      options?: { blockIdentifier?: BlockIdentifier }
-    ): Promise<EstimateFeeResponse>;
-  };
+      options?: { blockIdentifier?: BlockIdentifier },
+    ): Promise<EstimateFeeResponse>
+    flush(target_domain: BigNumberish, options?: { blockIdentifier?: BlockIdentifier }): Promise<EstimateFeeResponse>
+  }
 }

@@ -1,6 +1,6 @@
-import { startServer } from "../server";
-import { monitor } from "../tasks/monitor";
-import { run } from "./utils";
+import { startServer } from '../server'
+import { monitor } from '../tasks/monitor'
+import { run } from './utils'
 
 void run(
   async ({
@@ -18,8 +18,8 @@ void run(
       flushRepository,
       synchronizerStatusRepository,
       settleRepository,
-    });
+    })
 
-    await startServer(metrics);
-  }
-);
+    await startServer(metrics)
+  },
+)
