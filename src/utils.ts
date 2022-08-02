@@ -1,3 +1,5 @@
+import ethers from "ethers";
+
 export function setIntervalAsync(
   fn: () => Promise<void>,
   gap: number
@@ -52,6 +54,14 @@ export function makeMetricName(
 
 export function toL1String(x: string): string {
   return `0x${BigInt(x).toString(16).padEnd(64, "0")}`;
+}
+
+export function l1String(x: string): string {
+  return ethers.utils.formatBytes32String(x);
+}
+
+export function l2String(x: string): string {
+  return `0x${Buffer.from(x, "utf8").toString("hex")}`;
 }
 
 export function toBytes32(x: string): string {

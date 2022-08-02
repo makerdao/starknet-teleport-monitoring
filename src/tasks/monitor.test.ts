@@ -16,6 +16,7 @@ import { SettleRepository } from "../peripherals/db/SettleRepository";
 import { SynchronizerStatusRepository } from "../peripherals/db/SynchronizerStatusRepository";
 import { TeleportRepository } from "../peripherals/db/TeleportRepository";
 import { getGoerliSdk } from "../sdk";
+import { l1String } from "../utils";
 import { monitor } from "./monitor";
 
 describe("Monitoring", () => {
@@ -76,8 +77,8 @@ describe("Monitoring", () => {
       .connect(impersonator)
       .addSigners(signers.map((s) => s.address));
     const teleport = {
-      sourceDomain: ethers.utils.formatBytes32String(sourceDomain),
-      targetDomain: ethers.utils.formatBytes32String(targetDomain),
+      sourceDomain: l1String(sourceDomain),
+      targetDomain: l1String(targetDomain),
       receiver: ethers.utils.hexZeroPad(receiver.address, 32),
       operator: ethers.utils.hexZeroPad(receiver.address, 32),
       amount: daiToMint.toString(),

@@ -1,7 +1,6 @@
-import { formatBytes32String } from "ethers/lib/utils";
-
 import { SettleRepository } from "../peripherals/db/SettleRepository";
 import { L1Sdk } from "../sdks";
+import { l1String } from "../utils";
 
 export async function monitorTeleportSettle(
   l1Sdk: L1Sdk,
@@ -19,8 +18,6 @@ export async function monitorTeleportSettle(
     sinceLastSettle: lastSettle
       ? currentTimestamp - lastSettle.timestamp.getTime()
       : +Infinity,
-    debtToSettle: (
-      await l1Sdk.join.debt(formatBytes32String(sourceDomain))
-    ).toString(),
+    debtToSettle: (await l1Sdk.join.debt(l1String(sourceDomain))).toString(),
   };
 }

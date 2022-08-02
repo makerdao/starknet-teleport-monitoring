@@ -1,5 +1,6 @@
 import { FlushRepository } from "../peripherals/db/FlushRepository";
 import { L2Sdk } from "../sdks";
+import { l2String } from "../utils";
 
 export async function monitorTeleportFlush(
   l2Sdk: L2Sdk,
@@ -12,13 +13,15 @@ export async function monitorTeleportFlush(
     sourceDomain,
     targetDomain
   );
-
+  const { res: _debtToFlush } =
+    await l2Sdk.teleportGateway.batched_dai_to_flush(l2String(targetDomain));
+  const debtToFlush = `0x${_debtToFlush.low.toString(
+    16
+  )}${_debtToFlush.high.toString(16)}`;
   return {
     sinceLastFlush: lastFlush
       ? currentTimestamp - lastFlush.timestamp.getTime()
       : +Infinity,
-    debtToFlush: await l2Sdk.teleportGateway.batched_dai_to_flush(
-      `0x${Buffer.from(targetDomain, "utf8").toString("hex")}`
-    ),
+    debtToFlush,
   };
 }
