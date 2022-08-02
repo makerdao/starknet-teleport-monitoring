@@ -1,13 +1,13 @@
-import { defineConfig } from '@dethcrypto/eth-sdk'
-import { join } from 'path'
+import { defineConfig } from "@dethcrypto/eth-sdk";
+import { join } from "path";
 
 export default defineConfig({
   contracts: {
     goerli: {
-      dai: '0xd7F24C609825a4348dEc3C856Aa8796696355Fcd',
-      escrow: '0x39FE883fC4b7966ccbff49094e28E665A0A67E3b',
-      join: '0x3e55b205760829Ff478191FfEAA3C542F982C096',
-      oracleAuth: '0x455f17Bdd98c19e3417129e7a821605661623aD7',
+      dai: "0xd7F24C609825a4348dEc3C856Aa8796696355Fcd",
+      escrow: "0x39FE883fC4b7966ccbff49094e28E665A0A67E3b",
+      join: "0x3e55b205760829Ff478191FfEAA3C542F982C096",
+      oracleAuth: "0x455f17Bdd98c19e3417129e7a821605661623aD7",
     },
     /*
     starknetGoerli: {
@@ -16,5 +16,5 @@ export default defineConfig({
     },
     */
   },
-  outputPath: join(__dirname, '../src/sdk'),
-})
+  outputPath: join(__dirname, "../src/sdk"),
+});

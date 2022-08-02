@@ -1,10 +1,10 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
 
 export function null2Undefined<T>(val: T | null): T | undefined {
   if (val === null) {
-    return undefined
+    return undefined;
   }
-  return val
+  return val;
 }
 
-export type TxHandle = PrismaClient
+export type TxHandle = PrismaClient;

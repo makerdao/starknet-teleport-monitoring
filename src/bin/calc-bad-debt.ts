@@ -1,4 +1,4 @@
-import { calcBadDebt } from '../tasks/calc-bad-debt'
-import { run } from './utils'
+import { calcBadDebt } from "../tasks/calc-bad-debt";
+import { run } from "./utils";
 
-void run(calcBadDebt)
+void run(calcBadDebt);
