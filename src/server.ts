@@ -20,6 +20,6 @@ export async function startServer(metrics: Metrics) {
   })
 
   const port = 8080
-  const address = await fastify.listen(port)
+  const address = await fastify.listen({ port, host: '0.0.0.0' })
   console.log(`Listening on ${address}`)
 }
