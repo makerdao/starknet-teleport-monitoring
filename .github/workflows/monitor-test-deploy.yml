@@ -46,9 +46,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGION: us-east-1
-      SERVICE_NAME_GOERLI: teleport-monitor-prod
+      SERVICE_NAME_GOERLI: starknet-teleport-monitor-goerli-prod
       CLUSTER_NAME: teleport-monitor-prod
-      ECR_REPO_NAME: teleport-monitor-prod
+      ECR_REPO_NAME: starknet-teleport-monitor-prod
 
     steps:
       - name: Checkout
