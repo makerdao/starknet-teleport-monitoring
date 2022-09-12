@@ -25,8 +25,8 @@ export class FlushEventsSynchronizer extends GenericSynchronizer {
 
   async sync(from: number, to: number) {
     const filter = {
-      fromBlock: from,
-      toBlock: to - 1,
+      fromBlock: { block_number: from },
+      toBlock: { block_number: to - 1 },
       address: this.l2Sdk.teleportGateway.address,
       keys: [hash.getSelectorFromName('Flushed')],
       page_size: 50,
