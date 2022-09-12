@@ -28,13 +28,12 @@
     "axios": "^0.26.0",
     "ethers": "^5.5.4",
     "fastify": "^3.29.0",
-    "starknet": "^4.0.0",
+    "starknet": "^4.4.0",
     "ts-essentials": "^9.1.2"
   },
   "devDependencies": {
     "@dethcrypto/eth-sdk": "^0.3.2",
     "@nomiclabs/hardhat-ethers": "^2.0.6",
-    "@typechain/starknet": "^0.2.3",
     "@types/glob": "^7.2.0",
     "@types/lodash": "^4.14.181",
     "@types/mocha": "^9.1.1",
