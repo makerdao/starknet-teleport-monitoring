@@ -45,7 +45,7 @@ export class FlushEventsSynchronizer extends GenericSynchronizer {
           sourceDomain: this.domainName,
           targetDomain: parseBytes32String(toL1String(w.data[0])),
           amount: w.data[1].toString(),
-          timestamp: new Date(block.accepted_time * 1000),
+          timestamp: new Date(block.timestamp * 1000),
         }
       }),
     )
