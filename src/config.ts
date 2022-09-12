@@ -17,15 +17,15 @@ export const networks: { [id: number]: NetworkConfig } = {
         name: 'ALPHA_GOERLI-SLAVE-1',
         l2Rpc: {
           rpc: {
-            nodeUrl: 'https://starknet-goerli.infura.io/v3/56387818e18e404a9a6d2391af0e9085',
+            nodeUrl: 'https://starknet-goerli.infura.io/v3/0a0b5cc7abb944b184c6355cccbe5984',
           },
         },
         sdkName: 'StarknetGoerli',
-        bridgeDeploymentBlock: 330000,
+        bridgeDeploymentBlock: 6981585,
         syncBatchSize: 100_000,
       },
     ],
-    joinDeploymentBlock: 330000,
+    joinDeploymentBlock: 6861356,
     syncBatchSize: 100_000,
   },
 }
