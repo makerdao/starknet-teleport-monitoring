@@ -1,4 +1,4 @@
-name: Teleport Monitoring
+name: Test and Deploy
 
 on:
   push:
