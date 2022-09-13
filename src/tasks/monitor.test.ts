@@ -1,6 +1,6 @@
-const hre = require('hardhat')
 import { expect } from 'earljs'
 import { ethers, providers, Wallet } from 'ethers'
+import hre from 'hardhat'
 import { Provider } from 'starknet'
 import waitForExpect from 'wait-for-expect'
 
