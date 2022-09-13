@@ -18,7 +18,7 @@ import { monitor } from './monitor'
 
 describe('Monitoring', () => {
   const goerliProxy = '0x9FdeD504a45b3C13C96ebca7becDd9677D342340'
-  const hhProvider = hre.ethers.provider as providers.Provider
+  const hhProvider = (hre as any).ethers.provider as providers.Provider
   const signers = [Wallet.createRandom()]
   const receiver = Wallet.createRandom().connect(hhProvider)
   let cancel: Function
