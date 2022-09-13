@@ -32,7 +32,6 @@ describe('Monitoring', () => {
     // start monitoring
     const network = networks[chainIds.GOERLI]
     const l2Provider = new Provider(network.slaves[0].l2Rpc)['provider']
-    console.log(hhProvider, process.env)
     const teleportRepository = new TeleportRepository(prisma)
     const settleRepository = new SettleRepository(prisma)
     const synchronizerStatusRepository = new SynchronizerStatusRepository(prisma)
