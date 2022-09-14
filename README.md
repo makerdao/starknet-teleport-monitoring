@@ -5,10 +5,13 @@ Prometheus enabled monitoring service for Maker Teleport.
 ## Implemented checks
 
 These checks are run on _every new finalized block_:
-
-- _bridge invariant_ - compares amount of L1 escrowed DAI vs L2 DAI total supply
-- _bad debt_ - ensures that every new L1 mint using oracle auth has a corresponding burn on L2. **Note: This will only
+- `teleport_bad_debt`, `teleport_bad_debt_l1_block` - - ensures that every new L1 mint using oracle auth has a corresponding burn on L2. **Note: This will only
   monitor, new upcoming wormholes and will reset after restart! Use one of the scripts to calculate all bad debt**
+- `teleport_l1_dai_balance`, `teleport_l2_dai_balance` - L1 bridge escrow DAI balance and L2 total DAI amount
+- `teleport_last_flush_ms` - last flush
+- `teleport_debt_to_flush` - DAI amount to be flushed
+- `teleport_last_settle_ms` - last settle timestamp
+- `teleport_debt_to_settle` - DAI amount settled but not flushed
 
 ## Running
 
