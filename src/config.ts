@@ -14,7 +14,7 @@ export const networks: { [id: number]: NetworkConfig } = {
     sdkName: 'Goerli',
     slaves: [
       {
-        name: 'ALPHA_GOERLI-SLAVE-1',
+        name: 'ALPHA_GOERLI-SLAVE-STARKNET-1',
         l2Rpc: {
           rpc: {
             nodeUrl: 'https://starknet-goerli.infura.io/v3/0a0b5cc7abb944b184c6355cccbe5984',
