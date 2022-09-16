@@ -1,3 +1,4 @@
+import { BigNumber } from 'ethers'
 import { SettleRepository } from '../peripherals/db/SettleRepository'
 import { L1Sdk } from '../sdks'
 import { l1String } from '../utils'
@@ -13,6 +14,6 @@ export async function monitorTeleportSettle(
 
   return {
     sinceLastSettle: lastSettle ? currentTimestamp - lastSettle.timestamp.getTime() : +Infinity,
-    debtToSettle: (await l1Sdk.join.debt(l1String(sourceDomain))).toString(),
+    debtToSettle: (await l1Sdk.join.debt(l1String(sourceDomain))).mul(BigNumber.from(10 ** 14)).toString(),
   }
 }
