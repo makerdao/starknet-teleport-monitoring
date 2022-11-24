@@ -36,12 +36,12 @@ export class InitEventsSynchronizer extends GenericSynchronizer {
 
   async sync(from: number, to: number) {
     const filter = {
-      fromBlock: { block_number: from },
-      toBlock: { block_number: to - 1 },
+      from_block: { block_number: from },
+      to_block: { block_number: to - 1 },
       address: this.l2Sdk.teleportGateway.address,
       keys: [hash.getSelectorFromName('TeleportInitialized')],
-      page_size: 50,
-      page_number: 0,
+      chunk_size: 50,
+      // page_number: 0,
     }
 
     const { events: newTeleports } = await this.l2Sdk.provider.getEvents(

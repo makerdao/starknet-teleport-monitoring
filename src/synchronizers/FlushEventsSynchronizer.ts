@@ -25,12 +25,12 @@ export class FlushEventsSynchronizer extends GenericSynchronizer {
 
   async sync(from: number, to: number) {
     const filter = {
-      fromBlock: { block_number: from },
-      toBlock: { block_number: to - 1 },
+      from_block: { block_number: from },
+      to_block: { block_number: to - 1 },
       address: this.l2Sdk.teleportGateway.address,
       keys: [hash.getSelectorFromName('Flushed')],
-      page_size: 50,
-      page_number: 0,
+      chunk_size: 50,
+      // page_number: 0,
     }
 
     // @ts-ignore StarknetJs types are wrong
