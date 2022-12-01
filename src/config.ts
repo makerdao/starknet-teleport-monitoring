@@ -4,13 +4,14 @@ import { NetworkConfig } from './types'
 
 export const chainIds = {
   GOERLI: 5,
+  MAINNET: 1,
 }
 export const idsToChains = invert(chainIds)
 
 export const networks: { [id: number]: NetworkConfig } = {
   [chainIds.GOERLI]: {
     networkName: 'goerli',
-    name: 'GOERLI-MASTER-1',
+    name: 'ETH-MAIN-A',
     sdkName: 'Goerli',
     slaves: [
       {
@@ -26,6 +27,26 @@ export const networks: { [id: number]: NetworkConfig } = {
       },
     ],
     joinDeploymentBlock: 6861356,
+    syncBatchSize: 100_000,
+  },
+  [chainIds.MAINNET]: {
+    networkName: 'mainnet',
+    name: 'ETH-MAIN-A',
+    sdkName: 'Mainnet',
+    slaves: [
+      {
+        name: 'STA-MAIN-A',
+        l2Rpc: {
+          rpc: {
+            nodeUrl: 'https://starknet-mainnet.infura.io/v3/0a0b5cc7abb944b184c6355cccbe5984',
+          },
+        },
+        sdkName: 'StarknetMainnet',
+        bridgeDeploymentBlock: 13620200,
+        syncBatchSize: 100_000,
+      },
+    ],
+    joinDeploymentBlock: 13620297,
     syncBatchSize: 100_000,
   },
 }

@@ -20,7 +20,7 @@ export function getStarknetGoerliSdk(defaultAccountOrProvider: Account | Provide
       defaultAccountOrProvider,
     ),
     teleportGateway: getContract(
-      '0x03236409bbcd10f29d56cbe270e383d865e71837959cea7127611d4890bb46d9',
+      '0x078e1e7cc88114fe71be7433d1323782b4586c532a1868f072fc44ce9abf6714',
       starknetGoerliTeleportGatewayAbi,
       defaultAccountOrProvider,
     ),
