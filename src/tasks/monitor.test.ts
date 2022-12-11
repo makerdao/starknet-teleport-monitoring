@@ -17,7 +17,7 @@ import { l1String } from '../utils'
 import { monitor } from './monitor'
 
 describe('Monitoring', () => {
-  const goerliProxy = '0x9FdeD504a45b3C13C96ebca7becDd9677D342340'
+  const goerliProxy = '0x5DCdbD3cCF9B09EAAD03bc5f50fA2B3d3ACA0121'
   const hhProvider = (hre as any).ethers.provider as providers.Provider
   const signers = [Wallet.createRandom()]
   const receiver = Wallet.createRandom().connect(hhProvider)
@@ -25,8 +25,8 @@ describe('Monitoring', () => {
   const prisma = setupDatabaseTestSuite()
 
   it('detects bad debt', async () => {
-    const sourceDomain = 'ALPHA_GOERLI-SLAVE-STARKNET-1'
-    const targetDomain = 'GOERLI-MASTER-1'
+    const sourceDomain = 'STA-GOER-A'
+    const targetDomain = 'ETH-GOER-A'
     const daiToMint = 2137
 
     // start monitoring
@@ -83,7 +83,7 @@ describe('Monitoring', () => {
 
     // assert
     await waitForExpect(() => {
-      expect(metrics['teleport_bad_debt{domain="GOERLI-MASTER-1",network="goerli"}']).toEqual(daiToMint.toString())
+      expect(metrics['teleport_bad_debt{domain="ETH-GOER-A",network="goerli"}']).toEqual(daiToMint.toString())
     }, 20_000)
   })
 

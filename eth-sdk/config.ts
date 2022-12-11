@@ -5,8 +5,8 @@ export default defineConfig({
   contracts: {
     goerli: {
       dai: '0xd7F24C609825a4348dEc3C856Aa8796696355Fcd',
-      escrow: '0x39FE883fC4b7966ccbff49094e28E665A0A67E3b',
-      join: '0x3e55b205760829Ff478191FfEAA3C542F982C096',
+      escrow: '0x38c3ddf1ef3e045abddeb94f4e7a1a0d5440eb44',
+      join: '0xE2fddf4e0f5A4B6d0Cc1D162FBFbEF7B6c5D6f69',
       oracleAuth: '0x29d292E0773E484dbcA8626F432985630175763b',
     },
     mainnet: {
