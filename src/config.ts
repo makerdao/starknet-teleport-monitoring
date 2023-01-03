@@ -42,11 +42,11 @@ export const networks: { [id: number]: NetworkConfig } = {
           },
         },
         sdkName: 'StarknetMainnet',
-        bridgeDeploymentBlock: 13620200,
+        bridgeDeploymentBlock: 0,
         syncBatchSize: 100_000,
       },
     ],
-    joinDeploymentBlock: 13620297,
+    joinDeploymentBlock: 0,
     syncBatchSize: 100_000,
   },
 }
