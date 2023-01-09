@@ -2,12 +2,12 @@ import { providers } from 'ethers'
 import { Provider } from 'starknet'
 
 import * as sdks from './sdk'
-import { GoerliSdk } from './sdk'
-import { StarknetGoerliSdk } from './starknetSdk'
+import { GoerliSdk, MainnetSdk } from './sdk'
+import { StarknetGoerliSdk, StarknetMainnetSdk } from './starknetSdk'
 import * as starknetSdks from './starknetSdk/index'
 
-export type L1Sdk = GoerliSdk
-export type L2Sdk = StarknetGoerliSdk
+export type L1Sdk = GoerliSdk | MainnetSdk
+export type L2Sdk = StarknetGoerliSdk | StarknetMainnetSdk
 
 export function getL1SdkBasedOnNetworkName(sdkName: string, provider: providers.Provider): L1Sdk {
   const SDK = (sdks as any)[`get${sdkName}Sdk`]
