@@ -48,6 +48,7 @@ jobs:
     env:
       REGION: us-east-1
       SERVICE_NAME_GOERLI: starknet-teleport-monitor-goerli-prod
+      SERVICE_NAME_MAINNET: starknet-teleport-monitor-mainnet-prod
       CLUSTER_NAME: teleport-monitor-prod
       ECR_REPO_NAME: starknet-teleport-monitor-prod
 
@@ -91,10 +92,18 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPO_NAME --all-tags
 
       - name: Update ECS service Goerli
-        id: service-update
+        id: service-update-goerli
         run: |
           aws ecs update-service --cluster ${{ env.CLUSTER_NAME }} \
                                 --service ${{ env.SERVICE_NAME_GOERLI }} \
+                                --force-new-deployment \
+                                --region ${{ env.REGION }}
+
+      - name: Update ECS service Mainnet
+        id: service-update-mainnet
+        run: |
+          aws ecs update-service --cluster ${{ env.CLUSTER_NAME }} \
+                                --service ${{ env.SERVICE_NAME_MAINNET }} \
                                 --force-new-deployment \
                                 --region ${{ env.REGION }}
 
@@ -102,4 +111,4 @@ jobs:
         run: |
           aws ecs wait services-stable \
                     --cluster ${{ env.CLUSTER_NAME }} \
-                    --services '[ "${{ env.SERVICE_NAME_GOERLI }}" ]'
+                    --services '[ "${{ env.SERVICE_NAME_GOERLI }}", "${{ env.SERVICE_NAME_MAINNET }}" ]'
