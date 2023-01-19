@@ -16,7 +16,7 @@ export function getStarknetGoerliSdk(defaultAccountOrProvider: Account | Provide
   return {
     provider: defaultAccountOrProvider['provider'],
     dai: getContract(
-      '0x01903dbcb51945b5c4dffba0ff79b30644df4627c27d8ab0fc4ae07f6dbd18e9',
+      '0x03e85bfbb8e2a42b7bead9e88e9a1b19dbccf661471061807292120462396ec9',
       starknetGoerliDaiAbi,
       defaultAccountOrProvider,
     ),
